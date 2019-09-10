@@ -1,0 +1,42 @@
+{
+  "name": "checkin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cls-bluebird": "^2.1.0",
+    "html2canvas": "^1.0.0-rc.3",
+    "jspdf": "^1.5.3",
+    "node-sass": "^4.12.0",
+    "onedrive-api": "^0.3.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-pdf": "^4.0.5",
+    "react-scripts": "3.0.1",
+    "react-signature-canvas": "^1.0.2",
+    "sass": "^1.22.3",
+    "signature_pad": "^3.0.0-beta.3",
+    "webfontloader": "^1.6.28",
+    "yarn": "^1.16.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

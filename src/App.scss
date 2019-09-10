@@ -1,0 +1,109 @@
+@import url("https://use.typekit.net/wfr4wig.css");
+
+$pink: #ff0096;
+$med-gray: #5A5E6F;
+$light-gray: #D8D8D8;
+
+body {
+  font-family: "din-2014", sans-serif;
+  font-size: 1.25rem;
+  color: $med-gray;
+  margin: 0;
+}
+
+h1 {
+  font-size: 4rem;
+  color: $pink;
+}
+strong {
+  font-weight: 600;
+}
+ul, ol {
+  line-height: 26px;
+  margin: 1em 0;
+}
+ul {
+  margin-left: 1em;
+}
+.Container {
+  display: grid;
+}
+.form-wrapper {
+  margin: 175px 2rem 2rem 2rem;
+
+}
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+label {
+  display: inline-grid;
+  text-align: left;
+  font-size: .85em;
+  margin: 0;
+}
+input, select {
+  padding: .5em 0;
+  border-bottom: 2px solid $light-gray !important;
+  /* need to identify why important is needed */
+  border: 0;
+  font-size: .85em;
+  margin: 0 0 2em 0;
+
+}
+button {
+  outline: 0;
+  border: 0;
+  width: 150px;
+  height: 150px;
+  background: url(images/next-active.svg) $pink no-repeat center center;
+
+  &:disabled {
+    background: url(images/next.svg) $light-gray no-repeat center center;
+  }
+}
+.finish {
+  background: url(images/finish.svg) $pink no-repeat center center;
+}
+/* This needs to be overwritten by error */
+.focused {
+  outline: 0;
+  border-bottom: 2px solid $light-gray !important;
+}
+
+/* This needs to overwrite test */
+.error {
+  border-bottom: 2px solid red !important;
+}
+.Content {
+  grid-column-start: 1;
+  grid-column-end: span col4-start;
+}
+
+.Header {
+  color: $med-gray;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  grid-column-start: 1;
+  grid-column-end: span col4-start;
+  position: fixed;
+  height: 150px;
+
+  background-color: #fff;
+  width: 100vw;
+
+  .Header-Content {
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+    p {
+      margin-top: 75px;
+    }
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+}

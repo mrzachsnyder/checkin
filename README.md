@@ -4,7 +4,7 @@ checkin was an internal effort to replace an obsolete visitor check-in system. T
 - Designed for a stationary iPad
 
 ## Authors
-mrzachsnyder - JavaScript, JSX, application structure
+mrzachsnyder - JavaScript, JSX, application structure <br />
 amarshall    - CSS, JSX, visual style
 
 ## Primary Functionality
@@ -14,7 +14,7 @@ amarshall    - CSS, JSX, visual style
 - Converts signed NDA into PDF and uploads to OneDrive folder (incomplete)
 
 ## Dependencies
-Signature pad used on NDA: [React Signature Canvas](https://www.npmjs.com/package/react-signature-canvas)
+Signature pad used on NDA: [React Signature Canvas](https://www.npmjs.com/package/react-signature-canvas) <br />
 jsPDF library: [jsPDF](https://github.com/MrRio/jsPDF)
 
 ## Create React App boilerplate README.md

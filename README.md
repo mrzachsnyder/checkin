@@ -1,22 +1,21 @@
 ## About
-`checkin` was an internal effort to replace an obsolete visitor check-in system. The effort was killed when we learned that the API for checking first and last names against restricted persons lists is $10,000 per year - $8,000 more expensive than outsourcing the entirety of visitor check-in to a third party service.
-
-## Things to add
-This was built for iPad
+checkin was an internal effort to replace an obsolete visitor check-in system. The effort was killed when we learned that the API for checking first and last names against restricted persons lists is $10,000 per year - $8,000 more expensive than outsourcing the entirety of visitor check-in to a third party service.
+- Chunks of the app are unfinished
+- Designed for a stationary iPad
 
 ## Authors
-mrzachsnyder - JavaScript, JSX, application structure
-amarshall - CSS, JSX, visual style
+mrzachsnyder - JavaScript, JSX, application structure <br/>
+amarshall    - CSS, JSX, visual style
 
-## Primary functionality:
-Collects visitor information
-Checks visitor first and last name against restricted persons lists using backend service (incomplete)
-Guides visitor through NDA agreement
-Converts signed NDA into PDF and uploads to OneDrive folder (incomplete)
+## Primary Functionality
+- Collects visitor information
+- Checks visitor first and last name against restricted persons lists using backend service (incomplete)
+- Guides visitor through NDA agreement
+- Converts signed NDA into PDF and uploads to OneDrive folder (incomplete)
 
 ## Dependencies
 Signature pad used on NDA: [React Signature Canvas](https://www.npmjs.com/package/react-signature-canvas)
-jsPDF library: [jsPDF](jsdfurl)
+jsPDF library: [jsPDF](https://github.com/MrRio/jsPDF)
 
 ## Create React App boilerplate README.md
 

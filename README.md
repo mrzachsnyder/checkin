@@ -4,7 +4,7 @@ checkin was an internal effort to replace an obsolete visitor check-in system. T
 - Designed for a stationary iPad
 
 ## Authors
-mrzachsnyder - JavaScript, JSX, application structure <br/>
+mrzachsnyder - JavaScript, JSX, application structure
 amarshall    - CSS, JSX, visual style
 
 ## Primary Functionality

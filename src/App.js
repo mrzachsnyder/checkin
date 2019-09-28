@@ -57,11 +57,13 @@ class App extends React.Component {
       time: getCurrentTime(),
       // Starts with welcome state, paste in whatever state you want to work on
       render: 'welcome',
-      firstname: '',
-      lastname: '',
-      company: '',
-      reason: '',
-      host: '',
+      userData: {
+        firstname: '',
+        lastname: '',
+        company: '',
+        reason: '',
+        host: '',
+      },
       // Track whether or not form input has been touched
       touched: {
         firstname: false,
@@ -80,11 +82,7 @@ class App extends React.Component {
       }
     };
 
-    this.updateFirstName = this.updateFirstName.bind(this);
-    this.updateLastName = this.updateLastName.bind(this);
-    this.updateCompany = this.updateCompany.bind(this);
-    this.updateReason = this.updateReason.bind(this);
-    this.updateHost = this.updateHost.bind(this);
+    this.update = this.update(this);
 
     this.nameCheck = this.nameCheck.bind(this);
     this.updateRender = this.updateRender.bind(this);
@@ -93,29 +91,14 @@ class App extends React.Component {
   };
 
   // Form inputs are stateful and handled by update functions
-  updateFirstName(event) {
+  update(event) {
+    const property = event.target.name;
+
     this.setState({
-      firstname: event.target.value
-    });
-  }
-  updateLastName(event) {
-    this.setState({
-      lastname: event.target.value
-    });
-  }
-  updateCompany(event) {
-    this.setState({
-      company: event.target.value
-    });
-  }
-  updateReason(event) {
-    this.setState({
-      reason: event.target.value
-    });
-  }
-  updateHost(event) {
-    this.setState({
-      host: event.target.value
+      //firstname: event.target.value
+      if ( userData.hasOwnProperty(property) ) {
+        userDate[property] = event.target.value;
+      }
     });
   }
 
@@ -198,8 +181,12 @@ class App extends React.Component {
 
   // RENDER FUNCTION
   render() {
+    // This would be a great place to map your state to props
+    const { userData } = this.state; // But better to pass in props or use hooks
+
     // Disable submit button until all form fields are populated
-    const errors = validate(this.state.firstname, this.state.lastname, this.state.company, this.state.reason, this.state.host);
+    const errors = validate(userData);
+
     const isDisabled = Object.keys(errors).some(x => errors[x]);
 
     // Switch for animating the form fields
@@ -250,10 +237,11 @@ class App extends React.Component {
               <div className="form-group">
                 <label className="form-label">First name
                 <input
+                  name="firstname"
                   className={(animateTouch("firstname") ? "focused" : "form-input") + (shouldMarkError("firstname") ? " error" : "")}
                   onFocus={this.animateField.bind(this, "firstname")}
                   placeholder=""
-                  onChange={this.updateFirstName}
+                  onChange={this.update}
                   onBlur={this.nameCheck.bind(this, "firstname")}
                 />
                 </label>
@@ -261,10 +249,11 @@ class App extends React.Component {
               <div className="form-group">
                 <label className="form-label">Last name
                   <input
+                    name="lastname"
                     className={(animateTouch("lastname") ? "focused" : "form-input") + (shouldMarkError("lastname") ? " error" : "")}
                     onFocus={this.animateField.bind(this, "lastname")}
                     placeholder=""
-                    onChange={this.updateLastName}
+                    onChange={this.update}
                     onBlur={this.nameCheck.bind(this, "lastname")}
                   />
                 </label>

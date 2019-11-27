@@ -1,34 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NDA.scss';
 // Signature Canvas: https://www.npmjs.com/package/react-signature-canvas
 // Allows user to sign with their finger
 import SignatureCanvas from 'react-signature-canvas';
 
-class NDA extends React.Component {
+// Pull current date from the OS
+function GetCurrentDate() {
+  let now = new Date();
+  let options = {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  };
+  let date = new Intl.DateTimeFormat('en-US', options).format(now);
+  console.log(date);
+  return date;
+}
 
-  // Scroll tracking is not finished
-  componentDidMount() {
-    document.addEventListener('scroll', this.trackScroll);
-  }
+// Pull current time from the OS
+function GetCurrentTime() {
+  let now = new Date();
+  let options = {
+    hour: 'numeric',
+    minute: 'numeric'
+  };
+  let time = new Intl.DateTimeFormat('en-US', options).format(now);
+  console.log(time);
+  return time;
+}
 
-  componentWillUnmount() {
-    document.removeEventListener('scroll', this.trackScroll);
-  }
+function NDA(props) {
 
-  // The idea here is to prevent the user from moving on unless they've scrolled to the bottom of the nda-pdf div
-  trackScroll(event) {
-    const targetElement = document.getElementById('nda-pdf');
-    console.log('scrollTop: ' + targetElement.scrollTop);
-    console.log('scrollHeight: ' + targetElement.scrollHeight);
-    console.log('clientHeight: ' + targetElement.clientHeight);
-    // const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
-    // if (bottom) {
-    //   console.log('Bottom of the NDA');
-    // }
-  }
+  const [time, setTime] = useState(GetCurrentTime());
+  const [date, setDate] = useState(GetCurrentDate());
 
-  render() {
-    return (
+  return (
       <div className="Container">
         {/* Optional header or instructions for NDA */}
         {/* The NDA-pdf div is what will be rendered into a pdf and uploaded to OneDrive */}
@@ -38,12 +44,12 @@ class NDA extends React.Component {
               <div className="item"><p>Please sign an NDA</p></div>
               <div className="item next-active">
                 {/* Call the updateRender function in App.js onClick and pass it "NDA" for updateRender */}
-                <button className="finish" onClick={this.props.updateRender.bind(this, "NDA")} ></button>
+                <button className="finish" onClick={props.updateRender.bind(this, "NDA")} ></button>
               </div>
           </div>
         </div>
 
-        <div className="NDA" id="nda-pdf" onScroll={this.trackScroll} >
+        <div className="NDA" id="nda-pdf" >
           <h2>CONFIDENTIALITY AND NONDISCLOSURE AGREEMENT</h2>
           <br />
           <div className="content">
@@ -78,13 +84,12 @@ class NDA extends React.Component {
           <div className="NDA-signature">
           <SignatureCanvas canvasProps={{className: 'sigCanvas'}} />
           <div className="NDA-signed">
-            {this.props.firstName} on {this.props.lastName} {this.props.date} {this.props.time}
+            {props.firstName} {props.lastName} on {date} {time}
           </div>
         </div>
         </div>
       </div>
     )
-  }
 }
 
 export default NDA;

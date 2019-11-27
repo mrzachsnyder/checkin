@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 
 // The various conditionally rendered components in this app
@@ -12,58 +12,23 @@ import html2canvas from 'html2canvas';
 // Library for converting png to pdf
 import jsPDF from 'jspdf';
 
-
-// Pull current date from the OS
-function getCurrentDate() {
-  let now = new Date();
-  let options = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  };
-  let date = new Intl.DateTimeFormat('en-US', options).format(now);
-  return date;
-}
-
-// Pull current time from the OS
-function getCurrentTime() {
-  let now = new Date();
-  let options = {
-    hour: 'numeric',
-    minute: 'numeric'
-  };
-  let time = new Intl.DateTimeFormat('en-US', options).format(now);
-  return time;
-}
-
-// Make sure that form inputs are not empty
-function validate(firstname, lastname, company, reason, host) {
-  return {
-    firstname: firstname.length === 0,
-    lastname: lastname.length === 0,
-    company: company.length === 0,
-    reason: reason.length === 0,
-    host: host.length === 0
-  };
-}
-
 class App extends React.Component {
   // Initialize states and bind functions to this
   constructor(props) {
     super(props);
     // Form inputs are stateful so that they can dynamically change depending on what's typed into them
     this.state = {
-      date: getCurrentDate(),
-      time: getCurrentTime(),
+      // date: getCurrentDate(),
+      // time: getCurrentTime(),
       // Starts with welcome state, paste in whatever state you want to work on
-      render: 'welcome',
-      userData: {
-        firstname: '',
-        lastname: '',
-        company: '',
-        reason: '',
-        host: '',
-      },
+      render: 'NDA',
+
+      // https://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
+      firstname: 'Zach',
+      lastname: 'Snyder',
+      company: '',
+      reason: '',
+      host: '',
       // Track whether or not form input has been touched
       touched: {
         firstname: false,
@@ -82,8 +47,7 @@ class App extends React.Component {
       }
     };
 
-    this.update = this.update(this);
-
+    this.update = this.update.bind(this);
     this.nameCheck = this.nameCheck.bind(this);
     this.updateRender = this.updateRender.bind(this);
     this.markTouched = this.markTouched.bind(this);
@@ -92,14 +56,20 @@ class App extends React.Component {
 
   // Form inputs are stateful and handled by update functions
   update(event) {
-    const property = event.target.name;
-
     this.setState({
-      //firstname: event.target.value
-      if ( userData.hasOwnProperty(property) ) {
-        userDate[property] = event.target.value;
-      }
+      [event.target.name]: event.target.value
     });
+  }
+
+  // Make sure that form inputs are not empty
+  validate(firstname, lastname, company, reason, host) {
+    return {
+      firstname: firstname.length === 0,
+      lastname: lastname.length === 0,
+      company: company.length === 0,
+      reason: reason.length === 0,
+      host: host.length === 0
+    };
   }
 
   // Animate form field onFocus
@@ -182,11 +152,8 @@ class App extends React.Component {
   // RENDER FUNCTION
   render() {
     // This would be a great place to map your state to props
-    const { userData } = this.state; // But better to pass in props or use hooks
-
     // Disable submit button until all form fields are populated
-    const errors = validate(userData);
-
+    const errors = this.validate(this.state.firstname, this.state.lastname, this.state.company, this.state.reason, this.state.host);
     const isDisabled = Object.keys(errors).some(x => errors[x]);
 
     // Switch for animating the form fields
@@ -261,10 +228,11 @@ class App extends React.Component {
               <div className="form-group">
                 <label className="form-label">Company
                 <input
+                  name="company"
                   className={(animateTouch("company") ? "focused" : "form-input") + (shouldMarkError("company") ? " error" : "")}
                   onFocus={this.animateField.bind(this, "company")}
                   placeholder=""
-                  onChange={this.updateCompany}
+                  onChange={this.update}
                   onBlur={this.markTouched.bind(this, "company")}
                 />
                 </label>
@@ -272,10 +240,11 @@ class App extends React.Component {
               <div className="form-group">
                 <label className="form-label">Reason for visit
                 <input
+                  name="reason"
                   className={(animateTouch("reason") ? "focused" : "form-input") + (shouldMarkError("reason") ? " error" : "")}
                   onFocus={this.animateField.bind(this, "reason")}
                   placeholder=""
-                  onChange={this.updateReason}
+                  onChange={this.update}
                   onBlur={this.markTouched.bind(this, "reason")}
                 />
                 </label>
@@ -283,10 +252,11 @@ class App extends React.Component {
               <div className="form-group">
                 <label className="form-label">Host
                   <input
+                    name="host"
                     className={(animateTouch("host") ? "focused" : "form-input") + (shouldMarkError("host") ? " error" : "")}
                     onFocus={this.animateField.bind(this, "host")}
                     placeholder=""
-                    onChange={this.updateHost}
+                    onChange={this.update}
                     onBlur={this.markTouched.bind(this, "host")}
                   />
                 </label>
@@ -305,7 +275,7 @@ class App extends React.Component {
     else if (this.state.render === 'NDA') {
       return (
         <div className="NDA-render">
-          <NDA firstName={this.state.firstname} lastName={this.state.lastname} date={this.state.date} time={this.state.time} updateRender={this.updateRender} />
+          <NDA firstName={this.state.firstname} lastName={this.state.lastname} updateRender={this.updateRender} />
         </div>
       );
     }
